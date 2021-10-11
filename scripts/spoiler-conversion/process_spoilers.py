@@ -59,6 +59,9 @@ def process_spoilers(p):
 	path = pathlib.Path(p)
 	
 	with open(path, mode='r+') as f:
-		f.write(convert_spoilers_to_html(f.readlines()))
+		converted_text = convert_spoilers_to_html(f.readlines())
+		f.seek(0)
+		f.write(converted_text)
+		f.truncate()
 
 process_spoilers(R"C:\Dev\0 Git sync\react-course\00-js2-react\Course-01-Advanced JS\003-Connect 4\002-Basic State\006-modularizing.md")
