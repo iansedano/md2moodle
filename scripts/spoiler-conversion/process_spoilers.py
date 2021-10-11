@@ -25,12 +25,10 @@ def convert_spoilers_to_html(lines):
 	
 	def convert_spoilers_to_html_helper(line_gen):
 		line = next(line_gen, None)
-		
 		output = []
 		current = []
 		
 		while line:
-			
 			if start_tag.match(line):
 				if line.strip() != "[SPOILER]":
 					raise Exception(line, " seems to have something wrong with it", line.strip())
@@ -44,37 +42,23 @@ def convert_spoilers_to_html(lines):
 			elif end_tag.match(line):
 				if line.strip() != "[/SPOILER]":
 					raise Exception(line, " seems to have something wrong with it")
-				
-				output.append(
-					to_md(''.join(current))
-				)
-				
+				output.append(to_md(''.join(current)))
 				return ''.join(output)
 				
 			else:
 				current.append(line)
-				
 			line = next(line_gen, None)
-		
 		print(output)
+		
 		return ''.join(output)
 	
 	return convert_spoilers_to_html_helper(line_gen)
-
-'''
-<details>
-<summary>Spoiler</summary>
-<p>hidden stuff</p>
-</details>
-'''
-
 	
 
 def process_spoilers(p):
 	path = pathlib.Path(p)
 	
 	with open(path, mode='r+') as f:
-		html = convert_spoilers_to_html(f.readlines())
-		print(html)
+		f.write(convert_spoilers_to_html(f.readlines()))
 
 process_spoilers(R"C:\Dev\0 Git sync\react-course\00-js2-react\Course-01-Advanced JS\003-Connect 4\002-Basic State\006-modularizing.md")
