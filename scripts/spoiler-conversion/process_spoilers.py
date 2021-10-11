@@ -64,4 +64,4 @@ def process_spoilers(p):
 		f.write(converted_text)
 		f.truncate()
 
-process_spoilers(R"C:\Dev\0 Git sync\react-course\00-js2-react\Course-01-Advanced JS\003-Connect 4\002-Basic State\006-modularizing.md")
+process_spoilers(R"C:\Dev\0 Git sync\react-course\00-js2-react\Course-01-Advanced JS\003-Connect 4\003-Display\002-Your own library.md")
