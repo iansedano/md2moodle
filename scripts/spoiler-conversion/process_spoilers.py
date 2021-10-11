@@ -48,8 +48,7 @@ def convert_spoilers_to_html(lines):
 			else:
 				current.append(line)
 			line = next(line_gen, None)
-		print(output)
-		
+		output.append(''.join(current))
 		return ''.join(output)
 	
 	return convert_spoilers_to_html_helper(line_gen)
