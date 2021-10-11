@@ -31,7 +31,7 @@ def convert_spoilers_to_html(lines):
 		while line:
 			if start_tag.match(line):
 				if line.strip() != "[SPOILER]":
-					raise Exception(line, " seems to have something wrong with it", line.strip())
+					raise Exception(line, "seems to have something wrong with it")
 					
 				output.append(''.join(current))
 				current = []
@@ -41,7 +41,7 @@ def convert_spoilers_to_html(lines):
 				
 			elif end_tag.match(line):
 				if line.strip() != "[/SPOILER]":
-					raise Exception(line, " seems to have something wrong with it")
+					raise Exception(line, "seems to have something wrong with it")
 				output.append(to_md(''.join(current)))
 				return ''.join(output)
 				
@@ -58,9 +58,14 @@ def process_spoilers(p):
 	path = pathlib.Path(p)
 	
 	with open(path, mode='r+') as f:
-		converted_text = convert_spoilers_to_html(f.readlines())
-		f.seek(0)
-		f.write(converted_text)
-		f.truncate()
+		try:
+			converted_text = convert_spoilers_to_html(f.readlines())
+			f.seek(0)
+			f.write(converted_text)
+			f.truncate()
+		except:
+			print("something wrong with file", path)
+			
+		
 
 process_spoilers(R"C:\Dev\0 Git sync\react-course\00-js2-react\Course-01-Advanced JS\003-Connect 4\003-Display\002-Your own library.md")
