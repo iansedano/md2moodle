@@ -1,16 +1,40 @@
 import markdown2
 
 s = """
-<div>
-[ds](www.google.com)
-(ds)[www.google.com]
-**bold**
+## Heading
+
+[SPOILER]
+
+```js
+console.log("hello world")
 ```
-function(){
-	console.log(print)
-}
+
+[/SPOILER]
+
+
+[INFO]
+```js
+console.log("hello world")
 ```
-</div>
+
+[/INFO]
+
+
+[SPOILER]
+```js
+console.log("hello world")
+```
+
+[NOTE]
+```js
+console.log("hello world")
+```
+
+[/NOTE]
+
+_herl_
+[/SPOILER]
+
 """
 
 out = markdown2.markdown(s, extras=["fenced-code-blocks"])
