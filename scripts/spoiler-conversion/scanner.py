@@ -1,5 +1,3 @@
-
-
 class Scanner:
     def __init__(self, constructs):
         self.constructs = constructs
@@ -20,9 +18,26 @@ class Scanner:
                     self.errors.append(
                         "ERROR '" + line + "'. Tag must be only thing on line")
 
-    def scan(self, text):
+    def match(self, line):
+        for construct in self.constructs:
+            for token in construct.get_tokens():
+                if token.pattern.match(line):
+                    return token
+
+    def pre_scan(self, text):
         lines = text.split("\n")
         for line in lines:
             self.check(line)
         if self.errors:
             raise SyntaxError("\n" + "\n".join(self.errors))
+
+    def scan(self, text):
+        output = []
+        lines = text.split("\n")
+        for line in lines:
+            token = self.match(line)
+            if token:
+                output.append(token)
+            else:
+                output.append(line)
+        return output

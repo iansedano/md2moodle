@@ -1,13 +1,25 @@
 from scanner import Scanner
+from parser import Parser
 from constructs import constructs
 text = """
 hello these are words
 and does the newline
-[SPOILER][SPOILER]
-actually get [SPOILER] on it's own thing
+[SPOILER]
+actually get on it's own thing
+[/SPOILER]
+sdasd
+[ALERT]
+WATCH OUT!
+[/ALERT]
 """
 
-myscanner = Scanner(constructs)
+scanner = Scanner(constructs)
 
-myscanner.scan(text)
-print(myscanner.errors)
+scanner.pre_scan(text)
+
+output = scanner.scan(text)
+print(output)
+parser = Parser()
+tree = parser.parse(output)
+
+print("tree", tree)

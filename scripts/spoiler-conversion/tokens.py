@@ -6,6 +6,7 @@ from pprint import pp
 
 
 class Token_enum(Enum):
+    ROOT = auto()
     SPOILER = auto()
     NOTE = auto()
     ALERT = auto()
@@ -23,8 +24,8 @@ class Token:
         self.name, self.token_type = name, token_type
         self.pattern = re.compile(pattern)
 
-    def __repr__(self):
-        return (f"{self.name}, {self.token_type}, {self.pattern}")
+    # def __repr__(self):
+    #     return (f"{self.name}, {self.token_type}, {self.pattern}")
 
     def __eq__(self, other):
         return (
