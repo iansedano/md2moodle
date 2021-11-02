@@ -13,14 +13,11 @@ class Node():
 class Parser():
     def parse(self, lines: list):
         line_generator = (line for line in lines)
-        print("line gen", line_generator)
         tree = {"root": Node(Token_enum.ROOT)}
         parent_stack = [tree["root"]]
 
         line = next(line_generator, None)
-        print("first line", line)
         while line is not None:
-            print("line from parser", line)
             if isinstance(line, Token):
                 if line.token_type == Token_type_enum.OPEN_TAG:
                     new_node = Node(line.name)
@@ -32,10 +29,9 @@ class Parser():
 
             else:
                 parent_stack[-1].children.append(line)
-
+            
             line = next(line_generator, None)
         if len(parent_stack) != 1:
-            raise Exception(
-                "not at root level...tree has open nodes, parent stack has more than root")
+            raise Exception("Parse ended but tree has open nodes")
 
         return tree
