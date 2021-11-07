@@ -19,17 +19,17 @@ class Parser():
         line = next(line_generator, None)
         while line is not None:
             if isinstance(line, Token):
-                if line.token_type == Token_type_enum.OPEN_TAG:
+                if line.token_type == Token_type_enum.START_TAG:
                     new_node = Node(line.name)
                     parent_stack[-1].children.append(new_node)
                     parent_stack.append(new_node)
 
-                elif line.token_type == Token_type_enum.CLOSE_TAG:
+                elif line.token_type == Token_type_enum.END_TAG:
                     parent_stack.pop(-1)
 
             else:
                 parent_stack[-1].children.append(line)
-            
+
             line = next(line_generator, None)
         if len(parent_stack) != 1:
             raise Exception("Parse ended but tree has open nodes")

@@ -5,23 +5,16 @@ import re
 from pprint import pp
 
 
-class Token_enum(Enum):
-    ROOT = auto()
-    SPOILER = auto()
-    NOTE = auto()
-    ALERT = auto()
-    TAG = auto()
-
-
 class Token_type_enum(Enum):
-    OPEN_TAG = auto()
-    CLOSE_TAG = auto()
-    INLINE = auto()
+    START_TAG = "start_tag"
+    END_TAG = "end_tag"
+    PREFIX = "prefix"
 
 
 class Token:
-    def __init__(self, name: Token_enum, token_type: Token_type_enum, pattern: str):
-        self.name, self.token_type = name, token_type
+    def __init__(self, token_type: Token_type_enum, pattern: str):
+        self.token_type = token_type
+        self.precompiled_pattern = pattern
         self.pattern = re.compile(pattern)
 
     # def __repr__(self):
@@ -29,9 +22,9 @@ class Token:
 
     def __eq__(self, other):
         return (
-            self.name == other.name and
-            self.token_type == other.token_type
+            self.token_type == other.token_type and
+            self.precompiled_pattern == other.precompiled_pattern
         )
 
     def match(self, string, flags=0):
-        return re.match(self.pattern, string, flags)
+        return re.match(self.pattern, string.strip(), flags)
