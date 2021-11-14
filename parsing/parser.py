@@ -1,4 +1,4 @@
-from tokens import Token, Token_type_enum
+from parsing.tokens import Token, Token_type_enum
 
 
 class Node():

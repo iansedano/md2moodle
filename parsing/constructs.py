@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 
-from tokens import Token
+from parsing.tokens import Token
 
 
 class Element(metaclass=ABCMeta):

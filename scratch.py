@@ -15,6 +15,7 @@ WATCH OUT!
 """
 
 construct_builder = Construct_builder("rules.json")
+print(construct_builder.build())
 
 # scanner = Scanner(constructs)
 
