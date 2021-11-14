@@ -1,6 +1,6 @@
-from parsing.scanner import Scanner
-from parsing.parser import Parser
-import parsing.constructs as constructs
+# from parsing.scanner import Scanner
+# from parsing.parser import Parser
+from parsing.construct_builder import Construct_builder
 
 text = """
 hello these are words
@@ -14,13 +14,15 @@ WATCH OUT!
 [/ALERT]
 """
 
-scanner = Scanner(constructs)
+construct_builder = Construct_builder("rules.json")
 
-scanner.pre_scan(text)
+# scanner = Scanner(constructs)
 
-output = scanner.scan(text)
-print(output)
-parser = Parser()
-tree = parser.parse(output)
+# scanner.pre_scan(text)
 
-print("tree", tree)
+# output = scanner.scan(text)
+# print(output)
+# parser = Parser()
+# tree = parser.parse(output)
+
+# print("tree", tree)

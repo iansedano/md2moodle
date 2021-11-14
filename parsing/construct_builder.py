@@ -1,17 +1,17 @@
-from pathlib import Path
-from json import loads as load_json
+
 
 from tokens import Token
 from constructs import Default_element, Inline_element
 from action import Action, Action_type
 
+from rule_reader.file_reader import File_reader
+
 
 class Construct_builder:
-    def __init__(self, path):
+    def __init__(self, path: str):
         self.constructs = []
-        path = Path(path)
-        json = load_json(path.read_text())
-        self.rules = json.rules
+        rule_reader = File_reader(path)
+        self.rules = rule_reader.get_rules
         self.built = False
 
     def build(self):
