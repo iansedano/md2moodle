@@ -12,24 +12,31 @@ class Construct_builder:
         self.rules = rule_reader.get_rules()
         self.built = False
 
+    def _build_token(self, token_dict):
+        return Token(token_dict["type"], token_dict["pattern"])
+
+    def _build_action(self, action_dict):
+        return Action(Action_type[action_dict["type"]], **action_dict)
+
     def build(self):
         if self.built == False:
             for rule in self.rules:
-                print(rule)
+
                 # DEFAULT ELEMENT
                 if rule["element_type"] == "default":
-                    tokens = map(lambda token: Token(
-                        token["name"], token["pattern"]), rule["tokens"])
-                    actions = map(
-                        lambda action: Action(
-                            Action_type[action.type], **action)
-                    , tokens)
+                    tokens = map(self._build_token, rule["tokens"])
+                    actions = map(self._build_action, rule["actions"])
                     element = Default_element(rule["name"], *tokens)
-                    
+
                 # STANDALONE PREFIX
-                elif rule.element_type == "standalone_prefix":
-                    token = Token(rule.tokens[0].type, rule.tokens[0].pattern)
-                    element = Inline_element(rule.name, token)
+                elif rule["element_type"] == "standalone_prefix":
+                    if (len(rule["tokens"]) > 1):
+                        raise Exception(
+                            "standalone elements should have only one token")
+                    token = Token(rule["tokens"][0]["type"],
+                                  rule["tokens"][0]["pattern"])
+                    element = Inline_element(rule["name"], token)
+
                 self.constructs.append(element)
             self.built = True
         return self.constructs
