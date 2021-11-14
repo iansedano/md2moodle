@@ -26,7 +26,8 @@ class Construct_builder:
                 if rule["element_type"] == "default":
                     tokens = map(self._build_token, rule["tokens"])
                     actions = map(self._build_action, rule["actions"])
-                    element = Default_element(rule["name"], *tokens)
+                    element = Default_element(
+                        rule["name"], *tokens, actions=actions)
 
                 # STANDALONE PREFIX
                 elif rule["element_type"] == "standalone_prefix":
@@ -35,7 +36,9 @@ class Construct_builder:
                             "standalone elements should have only one token")
                     token = Token(rule["tokens"][0]["type"],
                                   rule["tokens"][0]["pattern"])
-                    element = Inline_element(rule["name"], token)
+                    actions = map(self._build_action, rule["actions"])
+                    element = Inline_element(
+                        rule["name"], token, actions=actions)
 
                 self.constructs.append(element)
             self.built = True
