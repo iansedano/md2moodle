@@ -8,6 +8,7 @@ class Token_type_enum(Enum):
     START_TAG = "start_tag"
     END_TAG = "end_tag"
     PREFIX = "prefix"
+    ROOT = "root"
 
 
 class Token:

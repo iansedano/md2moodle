@@ -13,14 +13,14 @@ class Node():
 class Parser():
     def parse(self, lines: list):
         line_generator = (line for line in lines)
-        tree = {"root": Node(Token_enum.ROOT)}
+        tree = {"root": Node(Token_type_enum.ROOT)}
         parent_stack = [tree["root"]]
 
         line = next(line_generator, None)
         while line is not None:
             if isinstance(line, Token):
                 if line.token_type == Token_type_enum.START_TAG:
-                    new_node = Node(line.name)
+                    new_node = Node(line.token_type)
                     parent_stack[-1].children.append(new_node)
                     parent_stack.append(new_node)
 
