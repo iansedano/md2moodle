@@ -1,8 +1,8 @@
-from tokens import Token, Token_enum, Token_type_enum
+from tokens import Token, Token_type_enum
 
 
 class Node():
-    def __init__(self, token_name: Token_enum):
+    def __init__(self, token_name):
         self.token_name = token_name
         self.children = []
 

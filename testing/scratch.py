@@ -1,6 +1,7 @@
-from scanner import Scanner
-from parser import Parser
-from constructs import constructs
+from parsing.scanner import Scanner
+from parsing.parser import Parser
+import parsing.constructs as constructs
+
 text = """
 hello these are words
 and does the newline
