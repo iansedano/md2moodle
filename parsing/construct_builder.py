@@ -30,18 +30,23 @@ class Construct_builder:
 
                 # DEFAULT
                 if rule["element_type"] == "default":
+                    start_tag = Token(
+                        token_type=Token_type_enum.START_TAG,
+                        pattern=rule["tokens"]["start_tag"],
+                    )
+
+                    end_tag = Token(
+                        token_type=Token_type_enum.END_TAG,
+                        pattern=rule["tokens"]["end_tag"],
+                    )
+
                     element = Default_element(
                         name=rule["name"],
-                        start_tag=Token(
-                            token_type=Token_type_enum.START_TAG,
-                            pattern=rule["tokens"]["start_tag"],
-                        ),
-                        end_tag=Token(
-                            token_type=Token_type_enum.END_TAG,
-                            pattern=rule["tokens"]["end_tag"],
-                        ),
+                        start_tag=start_tag,
+                        end_tag=end_tag,
                         actions=rule["actions"]
                     )
+
                     element.start_tag.add_parent(element)
                     element.end_tag.add_parent(element)
 
@@ -51,14 +56,17 @@ class Construct_builder:
                         raise Exception(
                             "standalone elements should have only one token")
 
+                    prefix = Token(
+                        token_type=Token_type_enum.PREFIX,
+                        pattern=rule["tokens"]["prefix"],
+                    )
+
                     element = Prefix_inline_element(
                         name=rule["name"],
-                        prefix=Token(
-                            token_type=Token_type_enum.PREFIX,
-                            pattern=rule["tokens"]["prefix"],
-                        ),
+                        prefix=prefix,
                         actions=rule["actions"]
                     )
+
                     element.prefix.add_parent(element)
 
                 self.constructs.append(element)
