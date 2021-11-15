@@ -1,4 +1,4 @@
-from parsing.constructs import Element
+from constructs.elements import Element
 
 
 class Scanner:

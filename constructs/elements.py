@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
 from parsing.tokens import Token
-from action import Action, Action_type
+from constructs.action import Action, Action_type
 
 
 class Meta_element(metaclass=ABCMeta):

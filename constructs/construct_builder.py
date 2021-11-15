@@ -5,8 +5,8 @@ If there is a new construct type, or new rule, this is where it should go.
 """
 
 from parsing.tokens import Token, Token_type_enum
-from parsing.constructs import Default_element, Prefix_inline_element
-from action import Action, Action_type
+from constructs.elements import Default_element, Prefix_inline_element
+from constructs.action import Action, Action_type
 
 from rule_reader.file_reader import File_reader
 

@@ -1,4 +1,4 @@
-from parsing.construct_builder import Construct_builder
+from constructs.construct_builder import Construct_builder
 from parsing.scanner import Scanner
 from parsing.parser import Parser
 
