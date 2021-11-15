@@ -1,5 +1,8 @@
+from parsing.constructs import Element
+
+
 class Scanner:
-    def __init__(self, constructs):
+    def __init__(self, constructs: list[Element]):
         self.constructs = constructs
         self.patterns = []
         for construct in constructs:

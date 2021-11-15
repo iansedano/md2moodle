@@ -8,10 +8,6 @@ class Action_type(Enum):
 
 
 class Action():
-    def __init__(self, type, **kwargs):
+    def __init__(self, type: Action_type, payload: str):
         self.type = type
-
-        if self.type == Action_type.process_children:
-            self.convert_to = kwargs.convert_to
-        elif self.type == Action_type.add_prefix or self.type == Action_type.add_suffix:
-            self.payload = kwargs.payload
+        self.payload = payload
