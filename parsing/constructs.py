@@ -10,7 +10,7 @@ class Element(metaclass=ABCMeta):
 
 
 class Default_element(Element):
-    def __init__(self, name, start_tag: Token, end_tag: Token, *, actions):
+    def __init__(self, *, name: str, start_tag: Token, end_tag: Token, actions: dict):
         self.name = name
         self.start_tag = start_tag
         self.end_tag = end_tag
@@ -20,10 +20,10 @@ class Default_element(Element):
         return [self.start_tag, self.end_tag]
 
 
-class Inline_element(Element):
-    def __init__(self, name, token: Token, *, actions):
+class Prefix_inline_element(Element):
+    def __init__(self, *, name: str, prefix: Token, actions: dict):
         self.name = name
-        self.token = token
+        self.prefix = prefix
         self.actions = actions
 
     def get_tokens(self):
