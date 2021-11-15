@@ -2,35 +2,35 @@ from parsing.tokens import Token, Token_type_enum
 
 
 class Node():
-    def __init__(self, token_name):
-        self.token_name = token_name
+    def __init__(self, construct):
+        self.construct = construct
         self.children = []
 
     def __repr__(self):
-        return str(self.token_name) + str(self.children)
+        return str(self.construct.name) + str(self.children)
 
 
 class Parser():
-    def parse(self, lines: list):
-        line_generator = (line for line in lines)
+    def parse(self, tokens: list):
+        token_generator = (token for token in tokens)
         tree = {"root": Node(Token_type_enum.ROOT)}
         parent_stack = [tree["root"]]
 
-        line = next(line_generator, None)
-        while line is not None:
-            if isinstance(line, Token):
-                if line.token_type == Token_type_enum.START_TAG:
-                    new_node = Node(line.token_type)
+        token = next(token_generator, None)
+        while token is not None:
+            if isinstance(token, Token):
+                if token.token_type == Token_type_enum.START_TAG:
+                    new_node = Node(token.parent)
                     parent_stack[-1].children.append(new_node)
                     parent_stack.append(new_node)
 
-                elif line.token_type == Token_type_enum.END_TAG:
+                elif token.token_type == Token_type_enum.END_TAG:
                     parent_stack.pop(-1)
 
             else:
-                parent_stack[-1].children.append(line)
+                parent_stack[-1].children.append(token)
 
-            line = next(line_generator, None)
+            token = next(token_generator, None)
         if len(parent_stack) != 1:
             raise Exception("Parse ended but tree has open nodes")
 

@@ -12,10 +12,12 @@ class Token_type_enum(Enum):
 
 
 class Token:
-    def __init__(self, *, token_type: Token_type_enum, pattern: str, parent):
+    def __init__(self, *, token_type: Token_type_enum, pattern: str):
         self.token_type = token_type
         self.precompiled_pattern = pattern
         self.pattern = re.compile(pattern)
+
+    def add_parent(self, parent):
         self.parent = parent
 
     def __eq__(self, other):

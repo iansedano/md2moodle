@@ -1,5 +1,3 @@
-
-
 from parsing.construct_builder import Construct_builder
 from parsing.scanner import Scanner
 from parsing.parser import Parser
@@ -23,10 +21,13 @@ scanner = Scanner(constructs)
 print("SCANNER BUILT")
 
 scanner.pre_scan(text)
-
+print("TEXT SCANNED")
 output = scanner.scan(text)
 
 parser = Parser()
-# tree = parser.parse(output)
+print("PARSER BUILT")
 
-# print("tree", tree)
+tree = parser.parse(output)
+print("TREE BUILT")
+
+print("tree", tree)

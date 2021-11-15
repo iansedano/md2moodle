@@ -35,15 +35,15 @@ class Construct_builder:
                         start_tag=Token(
                             token_type=Token_type_enum.START_TAG,
                             pattern=rule["tokens"]["start_tag"],
-                            parent=self
                         ),
                         end_tag=Token(
                             token_type=Token_type_enum.END_TAG,
                             pattern=rule["tokens"]["end_tag"],
-                            parent=self
                         ),
                         actions=rule["actions"]
                     )
+                    element.start_tag.add_parent(element)
+                    element.end_tag.add_parent(element)
 
                 # PREFIX INLINE
                 elif rule["element_type"] == "standalone_prefix":
@@ -56,10 +56,10 @@ class Construct_builder:
                         prefix=Token(
                             token_type=Token_type_enum.PREFIX,
                             pattern=rule["tokens"]["prefix"],
-                            parent=self
                         ),
                         actions=rule["actions"]
                     )
+                    element.prefix.add_parent(element)
 
                 self.constructs.append(element)
             self.built = True
