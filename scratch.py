@@ -1,7 +1,8 @@
 
-# from parsing.parser import Parser
+
 from parsing.construct_builder import Construct_builder
 from parsing.scanner import Scanner
+from parsing.parser import Parser
 
 text = """
 hello these are words
@@ -17,32 +18,15 @@ WATCH OUT!
 
 construct_builder = Construct_builder("rules.json")
 constructs = construct_builder.build()
-
+print("CONSTRUCTS BUILT")
 scanner = Scanner(constructs)
+print("SCANNER BUILT")
 
-for c in constructs:
-    for a in c.actions:
-        print(a.payload)
+scanner.pre_scan(text)
 
+output = scanner.scan(text)
 
-# scanner = Scanner(constructs)
-
-# scanner.pre_scan(text)
-
-# output = scanner.scan(text)
-# print(output)
-# parser = Parser()
+parser = Parser()
 # tree = parser.parse(output)
 
 # print("tree", tree)
-
-
-class test:
-    def __init__(self):
-        self.a = self.get_num()
-
-    def get_num(self):
-        return 10
-
-
-print(test().a)

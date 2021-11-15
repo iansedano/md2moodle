@@ -38,4 +38,4 @@ class Prefix_inline_element(Meta_element, Element):
         self.prefix = prefix
 
     def get_tokens(self):
-        return [self.token]
+        return [self.prefix]

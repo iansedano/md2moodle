@@ -8,7 +8,7 @@ class Scanner:
         for construct in constructs:
             for token in construct.get_tokens():
                 self.patterns.append(token.pattern)
-        self.errors = []
+        self.errors: list = []
 
     def check(self, line):
         for pattern in self.patterns:

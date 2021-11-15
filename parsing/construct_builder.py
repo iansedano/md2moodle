@@ -4,7 +4,7 @@ translated into classes that will parse and act on the text.
 If there is a new construct type, or new rule, this is where it should go.
 """
 
-from parsing.tokens import Token
+from parsing.tokens import Token, Token_type_enum
 from parsing.constructs import Default_element, Prefix_inline_element
 from action import Action, Action_type
 
@@ -13,7 +13,7 @@ from rule_reader.file_reader import File_reader
 
 class Construct_builder:
     def __init__(self, path: str):
-        self.constructs = []
+        self.constructs: list = []
         rule_reader = File_reader(path)
         self.rules = rule_reader.get_rules()
         self.built = False
@@ -32,8 +32,16 @@ class Construct_builder:
                 if rule["element_type"] == "default":
                     element = Default_element(
                         name=rule["name"],
-                        start_tag=rule["tokens"]["start_tag"],
-                        end_tag=rule["tokens"]["end_tag"],
+                        start_tag=Token(
+                            token_type=Token_type_enum.START_TAG,
+                            pattern=rule["tokens"]["start_tag"],
+                            parent=self
+                        ),
+                        end_tag=Token(
+                            token_type=Token_type_enum.END_TAG,
+                            pattern=rule["tokens"]["end_tag"],
+                            parent=self
+                        ),
                         actions=rule["actions"]
                     )
 
@@ -45,7 +53,11 @@ class Construct_builder:
 
                     element = Prefix_inline_element(
                         name=rule["name"],
-                        prefix=rule["tokens"]["prefix"],
+                        prefix=Token(
+                            token_type=Token_type_enum.PREFIX,
+                            pattern=rule["tokens"]["prefix"],
+                            parent=self
+                        ),
                         actions=rule["actions"]
                     )
 
