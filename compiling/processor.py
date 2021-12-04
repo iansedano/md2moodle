@@ -3,6 +3,7 @@
 
 from parsing.parser import Node
 import constructs.elements
+from constructs.action import Action
 
 
 def process_tree(tree):
@@ -19,9 +20,12 @@ def process_tree(tree):
         print(current_child)
 
         while current_child is not None:
+            print(current_child)
             if isinstance(current_child, Node):
-                construct = current_child.construct.actions
-                print(construct)
+                actions = current_child.construct.actions
+
+                for action in actions:
+                    print(action.type)
                 # process_branch(current_child)
             current_child: Node = next(children_generator, None)
 
