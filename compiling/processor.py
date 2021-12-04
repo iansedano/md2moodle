@@ -6,7 +6,8 @@ import constructs.elements
 
 
 def process_tree(tree):
-    root: Node = tree.root
+    print(tree)
+    root: Node = tree["root"]
 
     def process_branch(branch):
 
@@ -14,4 +15,14 @@ def process_tree(tree):
 
         children_generator = (child for child in children)
 
-        current_child = next(children_generator, None)
+        current_child: Node = next(children_generator, None)
+        print(current_child)
+
+        while current_child is not None:
+            if isinstance(current_child, Node):
+                construct = current_child.construct.actions
+                print(construct)
+                # process_branch(current_child)
+            current_child: Node = next(children_generator, None)
+
+    process_branch(root)
