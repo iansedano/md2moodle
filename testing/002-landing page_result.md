@@ -1,7 +1,7 @@
-@#logistics
-@#design-thinking
-@#module-project
-
+<span class="badge badge-pill badge-primary" style="font-size:1.2em; background-color:#fbb03b; color:black"><p>logistics</p>
+</span><span class="badge badge-pill badge-primary" style="font-size:1.2em; background-color:#fbb03b; color:black"><p>design-thinking</p>
+</span><span class="badge badge-pill badge-primary" style="font-size:1.2em; background-color:#fbb03b; color:black"><p>module-project</p>
+</span>
 To get the JavaScript juices flowing,
 this module project is to make a simple landing page for whatever you want.
 It could be a portfolio page or a presentation page for an artist.

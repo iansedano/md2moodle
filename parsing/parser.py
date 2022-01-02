@@ -19,10 +19,10 @@ class Parser:
         token = next(token_generator, None)
         adjacent_strings = []
         while token is not None:
-            print(token)
             if isinstance(token, Token):
                 parent_stack[-1].children.append("\n".join(adjacent_strings))
                 adjacent_strings = []
+
                 if token.token_type == Token_type_enum.START_TAG:
 
                     new_node = Node(token.parent)
@@ -32,6 +32,11 @@ class Parser:
                 elif token.token_type == Token_type_enum.END_TAG:
                     parent_stack.pop(-1)
 
+                elif token.token_type == Token_type_enum.PREFIX:
+                    new_node = Node(token.parent)
+                    new_node.children.append(next(token_generator, None))
+                    parent_stack[-1].children.append(new_node)
+
             else:
                 adjacent_strings.append(token)
 
@@ -39,4 +44,7 @@ class Parser:
         if len(parent_stack) != 1:
             raise Exception("Parse ended but tree has open nodes")
 
+        parent_stack[-1].children.append("\n".join(adjacent_strings))
+
+        print(tree)
         return tree
