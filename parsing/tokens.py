@@ -28,3 +28,6 @@ class Token:
 
     def match(self, string, flags=0):
         return re.match(self.pattern, string.strip(), flags)
+
+    def __repr__(self):
+        return f"TOKEN {self.token_type}"

@@ -34,8 +34,10 @@ class Scanner:
     def match(self, line):
         for construct in self.constructs:
             for token in construct.get_tokens():
-                if token.pattern.match(line):
-                    return token
+                match = token.pattern.match(line)
+                if match:
+                    return match, token
+        return None, None
 
     def pre_scan(self, text):
         lines = text.split("\n")
@@ -48,11 +50,12 @@ class Scanner:
         output = []
         lines = text.split("\n")
         for line in lines:
-            token = self.match(line)
+            match, token = self.match(line)
             if token:
                 # This is opt out of inline elements because they are matched and replaced during processing
                 if token.token_type == Token_type_enum.PREFIX:
-                    output.append(line)
+                    output.append(token)
+                    output.append(match[2])
                 else:
                     output.append(token)
             else:

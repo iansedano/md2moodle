@@ -1,14 +1,12 @@
-import re
+from constructs.action import md_to_html
 
 
-pattern = "(@#)(\\w+)"
-
-pattern = re.compile(pattern, re.MULTILINE)
-print(pattern)
-
-
-ex = """
-@#module-project
+print(
+    md_to_html(
+        """
+```html
+</>
+```
 """
-
-print(pattern.findall(ex))
+    )
+)
