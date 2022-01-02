@@ -19,6 +19,7 @@ class Parser:
         token = next(token_generator, None)
         adjacent_strings = []
         while token is not None:
+            print(token)
             if isinstance(token, Token):
                 parent_stack[-1].children.append("\n".join(adjacent_strings))
                 adjacent_strings = []

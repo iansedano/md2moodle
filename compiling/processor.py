@@ -4,13 +4,14 @@
 from parsing.parser import Node
 from parsing.tokens import Token_type_enum
 import constructs.elements
-from constructs.action import Action
+from constructs.action import Action, Action_type
+
+from debug import p
 
 
 def process_tree(tree):
     print(tree)
     root: Node = tree["root"]
-    output: list[str] = []
 
     def process_branch(branch):
 
@@ -19,17 +20,21 @@ def process_tree(tree):
         children_generator = (child for child in children)
 
         current_child: Node = next(children_generator, None)
-        print(current_child)
+        p(current_child)
 
         while current_child is not None:
-            print(current_child)
+            p(current_child)
             if isinstance(current_child, Node):
-                actions = current_child.construct.actions
+                actions = sorted(current_child.construct.actions, key=lambda a: a.type)
 
                 for action in actions:
-                    print(action.type)
-                # process_branch(current_child)
-            output.append(current_child)
+                    # p(action.type)
+                    # p(action.payload)
+                    # p(action.execute)
+                    action.execute(current_child)
+
             current_child: Node = next(children_generator, None)
 
     process_branch(root)
+
+    return root

@@ -1,4 +1,14 @@
+"""Scanner
+First pass of the text, identifying the tokens defined in the constructs.
+e.g.:
+
+[SPOILER]  - TOKEN
+This is a spoiler
+[/SPOILER]  - TOKEN
+"""
+
 from constructs.elements import Element
+from parsing.tokens import Token, Token_type_enum
 
 
 class Scanner:
@@ -14,12 +24,12 @@ class Scanner:
         for pattern in self.patterns:
             matches = pattern.findall(line)
             if len(matches) > 1:
-                self.errors.append(
-                    "ERROR '" + line + "'. Only one tag per line")
+                self.errors.append("ERROR '" + line + "'. Only one tag per line")
             elif len(matches) == 1:
                 if not pattern.match(line):
                     self.errors.append(
-                        "ERROR '" + line + "'. Tag must be only thing on line")
+                        "ERROR '" + line + "'. Tag must be only thing on line"
+                    )
 
     def match(self, line):
         for construct in self.constructs:
@@ -40,7 +50,11 @@ class Scanner:
         for line in lines:
             token = self.match(line)
             if token:
-                output.append(token)
+                # This is opt out of inline elements because they are matched and replaced during processing
+                if token.token_type == Token_type_enum.PREFIX:
+                    output.append(line)
+                else:
+                    output.append(token)
             else:
                 output.append(line)
         return output

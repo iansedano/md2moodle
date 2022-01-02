@@ -22,8 +22,8 @@ class Token:
 
     def __eq__(self, other):
         return (
-            self.token_type == other.token_type and
-            self.precompiled_pattern == other.precompiled_pattern
+            self.token_type == other.token_type
+            and self.precompiled_pattern == other.precompiled_pattern
         )
 
     def match(self, string, flags=0):
