@@ -1,12 +1,5 @@
-from constructs.action import md_to_html
+from shutil import rmtree
 
+from pathlib import Path
 
-print(
-    md_to_html(
-        """
-```html
-</>
-```
-"""
-    )
-)
+rmtree(Path("testing/export"))

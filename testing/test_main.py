@@ -135,3 +135,17 @@ def test_files():
 
 
 test_files()
+
+
+def test_course_exporter():
+    from conversion.course_export import export_course
+
+    export_course(
+        Path("rules.json"),
+        Path("testing/test_course"),
+        "**/*.md",
+        Path("testing/export"),
+    )
+
+
+test_course_exporter()
