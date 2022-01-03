@@ -68,7 +68,7 @@ def test_simple():
     assert compiled_output == SAMPLE_INPUT_A_CONVERTED
 
 
-# test_simple()
+test_simple()
 
 
 def test_nested():
