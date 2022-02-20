@@ -55,7 +55,7 @@
             "name": "todo item",
             "element_type": "standalone_prefix",
             "tokens": {
-                "prefix": "(TODO)(.+)"
+                "prefix": "(^TODO)(.+)"
             },
             "actions": {
                 "process_children": "delete"
