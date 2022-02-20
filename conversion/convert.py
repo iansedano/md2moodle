@@ -21,13 +21,7 @@ class Converter:
     def convert_text(self, text):
         self.scanner.pre_scan(text)
         output = self.scanner.scan(text)
-        print("\nSCANNED")
-        print(output)
         tree = self.parser.parse(output)
-        print("\nTREE")
-        print(tree)
         processed_tree = process_tree(tree)
-        print("\nPROCESSED TREE")
-        print(processed_tree)
         compiled_output = compile(processed_tree)
         return compiled_output

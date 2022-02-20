@@ -42,9 +42,8 @@ class Parser:
 
             token = next(token_generator, None)
         if len(parent_stack) != 1:
-            raise Exception("Parse ended but tree has open nodes")
+            raise Exception("Parsing error, open nodes or closing unopened node")
 
         parent_stack[-1].children.append("\n".join(adjacent_strings))
 
-        print(tree)
         return tree
