@@ -68,7 +68,7 @@ def test_simple():
     assert compiled_output == SAMPLE_INPUT_A_CONVERTED
 
 
-test_simple()
+# test_simple()
 
 
 def test_nested():
@@ -114,7 +114,7 @@ def test_nested():
     )
 
 
-test_nested()
+# test_nested()
 
 
 def test_files():
@@ -130,11 +130,11 @@ def test_files():
         print(result_path)
         text = Path(full_path).read_text()
         converted_text = converter.convert_text(text)
-        print(converted_text)
+        print("\n\nConverted text\n\n", converted_text)
         assert converted_text == Path(result_path).read_text()
 
 
-test_files()
+# test_files()
 
 
 def test_course_exporter():
@@ -148,4 +148,4 @@ def test_course_exporter():
     )
 
 
-test_course_exporter()
+# test_course_exporter()

@@ -26,6 +26,8 @@ class Action:
                 return self.add_suffix
             case Action(type=Action_type.process_children, payload="convert_to_html"):
                 return self.process_children_convert_to_html
+            case Action(type=Action_type.process_children, payload="delete"):
+                return self.delete_children
         
     
     def add_suffix(self, node: Node):
@@ -45,3 +47,6 @@ class Action:
             else:
                 new_children.append(child)
         node.children = new_children
+    
+    def delete_children(self, node: Node):
+        node.children = []
