@@ -7,8 +7,8 @@ This is a spoiler
 [/SPOILER]  - TOKEN
 """
 
-from constructs.elements import Element
-from parsing.tokens import Token, Token_type_enum
+from md2moodle.constructs.elements import Element
+from md2moodle.parsing.tokens import Token, Token_type_enum
 
 
 class Scanner:

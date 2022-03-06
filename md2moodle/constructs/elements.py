@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
-from parsing.tokens import Token
-from constructs.action import Action, Action_type
+from md2moodle.parsing.tokens import Token
+from md2moodle.constructs.action import Action, Action_type
 
 
 class Meta_element(metaclass=ABCMeta):

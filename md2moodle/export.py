@@ -1,6 +1,6 @@
 import argparse
 from pathlib import Path
-from conversion.course_export import export_course
+from md2moodle.conversion.course_export import export_course
 
 arg_parser = argparse.ArgumentParser(
     description="Exports markdown files to Moodle compatible format\n\n"

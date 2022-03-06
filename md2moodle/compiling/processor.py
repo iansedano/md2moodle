@@ -1,12 +1,12 @@
 """Will apply the actions from the constructs to the parsed tree
 """
 
-from parsing.parser import Node
-from parsing.tokens import Token_type_enum
-import constructs.elements
-from constructs.action import Action, Action_type
+from md2moodle.parsing.parser import Node
+from md2moodle.parsing.tokens import Token_type_enum
+import md2moodle.constructs.elements
+from md2moodle.constructs.action import Action, Action_type
 
-from debug import p
+from md2moodle.debug import p
 
 
 def process_tree(tree):

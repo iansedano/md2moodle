@@ -2,8 +2,8 @@
 """
 
 import re
-import constructs.elements
-import constructs.action
+import md2moodle.constructs.elements
+import md2moodle.constructs.action
 
 
 def compile(tree):

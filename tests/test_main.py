@@ -1,15 +1,14 @@
-from constructs.construct_builder import Construct_builder
-from constructs.elements import Prefix_inline_element
-from parsing.scanner import Scanner
-from parsing.parser import Parser
-from compiling.processor import process_tree
-from compiling.compiler import compile
-
-from conversion.convert import Converter
+from md2moodle.constructs.construct_builder import Construct_builder
+from md2moodle.constructs.elements import Prefix_inline_element
+from md2moodle.parsing.scanner import Scanner
+from md2moodle.parsing.parser import Parser
+from md2moodle.compiling.processor import process_tree
+from md2moodle.compiling.compiler import compile
+from md2moodle.conversion.convert import Converter
 
 from pathlib import Path
 
-from debug import p
+from md2moodle.debug import p
 
 SAMPLE_INPUT_A = """
 @#module-project
@@ -72,7 +71,7 @@ def test_simple():
 
 
 def test_nested():
-    text = Path("testing/nested.md").read_text()
+    text = Path("tests/nested.md").read_text()
 
     construct_builder = Construct_builder("rules.json")
     constructs = construct_builder.build()
@@ -125,7 +124,7 @@ def test_files():
 
     for path in test_files:
         print("\n\nNEW FILE\n\n")
-        full_path = "testing/" + path
+        full_path = "tests/" + path
         result_path = full_path[:-3] + "_result.md"
         print(result_path)
         text = Path(full_path).read_text()
@@ -138,13 +137,13 @@ def test_files():
 
 
 def test_course_exporter():
-    from conversion.course_export import export_course
+    from md2moodle.conversion.course_export import export_course
 
     export_course(
         Path("rules.json"),
-        Path("testing/test_course"),
+        Path("tests/test_course"),
         "**/*.md",
-        Path("testing/export"),
+        Path("tests/export"),
     )
 
 
