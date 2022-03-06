@@ -1,0 +1,6 @@
+{
+  "editor.formatOnSave": true,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "python.formatting.provider": "black"
+}
