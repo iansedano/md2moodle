@@ -18,7 +18,7 @@ class Parser:
         parent_stack = [tree["root"]]
 
         token = next(token_generator, None)
-        adjacent_strings = []
+        adjacent_strings: list[Token] = []
         while token is not None:
             if isinstance(token, Token):
                 parent_stack[-1].children.append("\n".join(adjacent_strings))

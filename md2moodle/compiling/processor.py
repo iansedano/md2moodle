@@ -2,11 +2,7 @@
 """
 
 # md2moodle imports
-import md2moodle.constructs.elements
-from md2moodle.constructs.action import Action, Action_type
-from md2moodle.debug import p
 from md2moodle.parsing.parser import Node
-from md2moodle.parsing.tokens import Token_type_enum
 
 
 def process_tree(tree):
@@ -16,7 +12,6 @@ def process_tree(tree):
         children: list = branch.children
         children_generator = (child for child in children)
         current_child: Node = next(children_generator, None)
-        text_buffer = []
 
         while current_child is not None:
             if isinstance(current_child, Node):
