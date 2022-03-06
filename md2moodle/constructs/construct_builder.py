@@ -4,11 +4,11 @@ translated into classes that will parse and act on the text.
 If there is a new construct type, or new rule, this is where it should go.
 """
 
-from parsing.tokens import Token, Token_type_enum
-from constructs.elements import Default_element, Prefix_inline_element
-from constructs.action import Action, Action_type
+from md2moodle.parsing.tokens import Token, Token_type_enum
+from md2moodle.constructs.elements import Default_element, Prefix_inline_element
+from md2moodle.constructs.action import Action, Action_type
 
-from rule_reader.file_reader import File_reader
+from md2moodle.rule_reader.file_reader import File_reader
 
 
 class Construct_builder:
@@ -44,7 +44,7 @@ class Construct_builder:
                         name=rule["name"],
                         start_tag=start_tag,
                         end_tag=end_tag,
-                        actions=rule["actions"]
+                        actions=rule["actions"],
                     )
 
                     element.start_tag.add_parent(element)
@@ -52,9 +52,10 @@ class Construct_builder:
 
                 # PREFIX INLINE
                 elif rule["element_type"] == "standalone_prefix":
-                    if (len(rule["tokens"]) > 1):
+                    if len(rule["tokens"]) > 1:
                         raise Exception(
-                            "standalone elements should have only one token")
+                            "standalone elements should have only one token"
+                        )
 
                     prefix = Token(
                         token_type=Token_type_enum.PREFIX,
@@ -62,9 +63,7 @@ class Construct_builder:
                     )
 
                     element = Prefix_inline_element(
-                        name=rule["name"],
-                        prefix=prefix,
-                        actions=rule["actions"]
+                        name=rule["name"], prefix=prefix, actions=rule["actions"]
                     )
 
                     element.prefix.add_parent(element)

@@ -1,5 +1,5 @@
 from enum import IntEnum
-from parsing.parser import Node
+from md2moodle.parsing.parser import Node
 
 import markdown2
 

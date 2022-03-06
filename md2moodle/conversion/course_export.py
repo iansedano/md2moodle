@@ -1,6 +1,6 @@
 from pathlib import Path
 from shutil import rmtree
-from conversion.convert import Converter
+from md2moodle.conversion.convert import Converter
 
 
 def export_course(rules: Path, course_root: Path, glob: str, output: Path):

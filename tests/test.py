@@ -1,6 +1,5 @@
 import markdown2
 
-def test
 
 s = """
 ## Heading
