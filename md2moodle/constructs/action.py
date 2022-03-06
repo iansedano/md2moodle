@@ -1,7 +1,12 @@
+# Standard library imports
 from enum import IntEnum
+
+# Third party imports
+import markdown2
+
+# md2moodle imports
 from md2moodle.parsing.parser import Node
 
-import markdown2
 
 def md_to_html(text):
 	return markdown2.markdown(text, extras=["fenced-code-blocks"])

@@ -1,7 +1,9 @@
+# Standard library imports
 from abc import ABCMeta, abstractmethod
 
-from md2moodle.parsing.tokens import Token
+# md2moodle imports
 from md2moodle.constructs.action import Action, Action_type
+from md2moodle.parsing.tokens import Token
 
 
 class Meta_element(metaclass=ABCMeta):

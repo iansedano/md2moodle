@@ -1,5 +1,8 @@
+# Standard library imports
 from pathlib import Path
 from shutil import rmtree
+
+# md2moodle imports
 from md2moodle.conversion.convert import Converter
 
 

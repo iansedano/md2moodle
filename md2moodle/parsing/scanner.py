@@ -7,6 +7,7 @@ This is a spoiler
 [/SPOILER]  - TOKEN
 """
 
+# md2moodle imports
 from md2moodle.constructs.elements import Element
 from md2moodle.parsing.tokens import Token, Token_type_enum
 

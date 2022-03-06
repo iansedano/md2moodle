@@ -1,9 +1,10 @@
-from md2moodle.constructs.elements import Prefix_inline_element
-from md2moodle.constructs.construct_builder import Construct_builder
-from md2moodle.parsing.scanner import Scanner
-from md2moodle.parsing.parser import Parser
-from md2moodle.compiling.processor import process_tree
+# md2moodle imports
 from md2moodle.compiling.compiler import compile
+from md2moodle.compiling.processor import process_tree
+from md2moodle.constructs.construct_builder import Construct_builder
+from md2moodle.constructs.elements import Prefix_inline_element
+from md2moodle.parsing.parser import Parser
+from md2moodle.parsing.scanner import Scanner
 
 
 class Converter:

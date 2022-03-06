@@ -1,6 +1,6 @@
-from enum import Enum
+# Standard library imports
 import re
-
+from enum import Enum
 from pprint import pp
 
 

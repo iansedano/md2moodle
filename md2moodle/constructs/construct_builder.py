@@ -4,10 +4,10 @@ translated into classes that will parse and act on the text.
 If there is a new construct type, or new rule, this is where it should go.
 """
 
-from md2moodle.parsing.tokens import Token, Token_type_enum
-from md2moodle.constructs.elements import Default_element, Prefix_inline_element
+# md2moodle imports
 from md2moodle.constructs.action import Action, Action_type
-
+from md2moodle.constructs.elements import Default_element, Prefix_inline_element
+from md2moodle.parsing.tokens import Token, Token_type_enum
 from md2moodle.rule_reader.file_reader import File_reader
 
 

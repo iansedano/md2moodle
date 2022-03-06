@@ -1,5 +1,8 @@
+# Standard library imports
 import argparse
 from pathlib import Path
+
+# md2moodle imports
 from md2moodle.conversion.course_export import export_course
 
 arg_parser = argparse.ArgumentParser(
