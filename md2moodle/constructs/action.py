@@ -2,9 +2,24 @@ from enum import IntEnum
 from md2moodle.parsing.parser import Node
 
 import markdown2
+import re
 
 def md_to_html(text):
-	return markdown2.markdown(text, extras=["fenced-code-blocks"])
+    
+    link_patterns = [
+        (re.compile(r'^\[([\w\s\d]+)\]\((https?:\/\/[\w\d./?=#]+)\)$'),r'\1')
+    ]
+    
+    return markdown2.markdown(
+        text,
+        extras={
+            "fenced-code-blocks": None,
+            "link-patterns": None,
+            "html-classes": {"img": "img-responsive cn-imgage"},
+            "target-blank-links": None
+        },
+        link_patterns=link_patterns
+    )
 
 class Action_type(IntEnum):
     process_children = 1
