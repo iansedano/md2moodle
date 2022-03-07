@@ -8,7 +8,7 @@ This is a spoiler
 """
 
 # md2moodle imports
-from md2moodle.constructs.elements import Element
+from md2moodle.constructs import Element
 from md2moodle.parsing.tokens import Token_type_enum
 
 

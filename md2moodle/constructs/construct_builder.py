@@ -1,7 +1,7 @@
-"""Construct Builder - where the information that comes in via JSON gets
+"""Element Builder - where the information that comes in via JSON gets
 translated into classes that will parse and act on the text.
 
-If there is a new construct type, or new rule, this is where it should go.
+If there is a new element type, or new rule, it needs to be handled here.
 """
 
 # Standard library imports
