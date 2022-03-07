@@ -4,7 +4,7 @@ from pathlib import Path
 # md2moodle imports
 from md2moodle.compiling.compiler import compile
 from md2moodle.compiling.processor import process_tree
-from md2moodle.constructs.construct_builder import Construct_builder
+from md2moodle.constructs.construct_builder import build_elements_from_rules
 from md2moodle.constructs.elements import Prefix_inline_element
 from md2moodle.conversion.convert import Converter
 from md2moodle.debug import p
@@ -38,8 +38,7 @@ sdjklsd</p>
 
 
 def test_simple():
-    construct_builder = Construct_builder("rules.json")
-    constructs = construct_builder.build()
+    constructs = build_elements_from_rules("rules.json")
     p(constructs)
     print("CONSTRUCTS BUILT\n\n")
     scanner = Scanner(constructs)
@@ -74,8 +73,7 @@ def test_simple():
 def test_nested():
     text = Path("tests/nested.md").read_text()
 
-    construct_builder = Construct_builder("rules.json")
-    constructs = construct_builder.build()
+    constructs = build_elements_from_rules("rules.json")
     p(constructs)
     print("CONSTRUCTS BUILT\n\n")
     scanner = Scanner(constructs)
