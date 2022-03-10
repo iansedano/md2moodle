@@ -7,8 +7,7 @@ from md2moodle.compiling.processor import process_tree
 from md2moodle.constructs.construct_builder import build_elements_from_rules
 from md2moodle.conversion.convert import Converter
 from md2moodle.debug import p
-from md2moodle.parsing.parser import Parser
-from md2moodle.parsing.scanner import Scanner
+from md2moodle.parsing import parse, Scanner
 
 SAMPLE_INPUT_A = """
 @#module-project
@@ -50,10 +49,7 @@ def test_simple():
     p(output)
     print("TEXT SCANNED\n\n")
 
-    parser = Parser()
-    print("PARSER BUILT\n\n")
-
-    tree = parser.parse(output)
+    tree = parse(output)
     p(tree)
     print("TREE BUILT\n\n")
 
@@ -85,10 +81,7 @@ def test_nested():
     p(output)
     print("TEXT SCANNED\n\n")
 
-    parser = Parser()
-    print("PARSER BUILT\n\n")
-
-    tree = parser.parse(output)
+    tree = parse(output)
     p(tree)
     print("TREE BUILT\n\n")
 
