@@ -13,6 +13,8 @@ from md2moodle.parsing.tokens import Token_type_enum
 
 
 class Scanner:
+    """Scans text and produces list of tokens based on a list of constructs available"""
+
     def __init__(self, constructs: list[Element]):
         self.constructs = constructs
         self.patterns = []

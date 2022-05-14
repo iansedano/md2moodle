@@ -3,6 +3,8 @@ from md2moodle.parsing.tokens import Token, Token_type_enum
 
 
 class Node:
+    """Generic class to build abstract syntax tree"""
+
     def __init__(self, construct):
         self.construct = construct
         self.children = []
@@ -12,6 +14,7 @@ class Node:
 
 
 def parse(tokens: list):
+    """Parses a list of tokens and builds an abstract syntax tree"""
     token_generator = (token for token in tokens)
     tree = {"root": Node(Token_type_enum.ROOT)}
     parent_stack = [tree["root"]]
@@ -24,14 +27,11 @@ def parse(tokens: list):
             adjacent_strings = []
 
             if token.token_type == Token_type_enum.START_TAG:
-
                 new_node = Node(token.parent)
                 parent_stack[-1].children.append(new_node)
                 parent_stack.append(new_node)
-
             elif token.token_type == Token_type_enum.END_TAG:
                 parent_stack.pop(-1)
-
             elif token.token_type == Token_type_enum.PREFIX:
                 new_node = Node(token.parent)
                 new_node.children.append(next(token_generator, None))

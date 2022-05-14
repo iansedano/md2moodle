@@ -18,6 +18,7 @@ class Action_type(IntEnum):
 
 
 class Action:
+    """Container for actions. All new actions should be defined here."""
     def __init__(self, type: Action_type, payload: str):
         self.type = type
         self.payload = payload

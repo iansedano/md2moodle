@@ -9,11 +9,15 @@ from json import loads as load_json
 from pathlib import Path
 
 # md2moodle imports
-from md2moodle.constructs.elements import Default_element, Prefix_inline_element
+from md2moodle.constructs.elements import (
+    Default_element,
+    Element,
+    Prefix_inline_element,
+)
 from md2moodle.parsing.tokens import Token, Token_type_enum
 
 
-def build_elements_from_rules(path_to_rules_file):
+def build_elements_from_rules(path_to_rules_file) -> list[Element]:
 
     elements: list = []
     json = load_json(Path(path_to_rules_file).read_text())
