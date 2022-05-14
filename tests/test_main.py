@@ -24,8 +24,7 @@ WATCH OUT!
 [/ALERT]
 """
 
-SAMPLE_INPUT_A_CONVERTED = """<span class="badge badge-pill badge-primary" style="font-size:1.2em; background-color:#fbb03b; color:black"><p>module-project</p>
-</span>hello these are words
+SAMPLE_INPUT_A_CONVERTED = """<span class="badge badge-pill badge-primary" style="font-size:1.2em; background-color:#fbb03b; color:black">module-project</span>hello these are words
 and does the newline<details>
 <summary>Spoiler</summary><h3>Try this header</h3>
 
