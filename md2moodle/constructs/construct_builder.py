@@ -5,7 +5,7 @@ If there is a new element type, or new rule, it needs to be handled here.
 """
 
 # Standard library imports
-from json import loads as load_json
+import json
 from pathlib import Path
 
 # md2moodle imports
@@ -17,11 +17,14 @@ from md2moodle.constructs.elements import (
 from md2moodle.parsing.tokens import Token, Token_type_enum
 
 
+def read_rule_file(path_to_rules_file):
+    return json.loads(Path(path_to_rules_file).read_text())
+
+
 def build_elements_from_rules(path_to_rules_file) -> list[Element]:
 
     elements: list = []
-    json = load_json(Path(path_to_rules_file).read_text())
-    rules = json["rules"]
+    rules = read_rule_file(Path(path_to_rules_file))
 
     for rule in rules:
 
