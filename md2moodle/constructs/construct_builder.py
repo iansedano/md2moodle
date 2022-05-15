@@ -24,7 +24,7 @@ def read_rule_file(path_to_rules_file):
 def build_elements_from_rules(path_to_rules_file) -> list[Element]:
 
     elements: list = []
-    rules = read_rule_file(Path(path_to_rules_file))
+    rules = read_rule_file(Path(path_to_rules_file))["rules"]
 
     for rule in rules:
 
