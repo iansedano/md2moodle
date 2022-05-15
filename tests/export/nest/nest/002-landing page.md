@@ -1,4 +1,4 @@
-<span class="badge badge-pill badge-primary" style="font-size:1.2em; background-color:#fbb03b; color:black">logistics</span><span class="badge badge-pill badge-primary" style="font-size:1.2em; background-color:#fbb03b; color:black">design-thinking</span><span class="badge badge-pill badge-primary" style="font-size:1.2em; background-color:#fbb03b; color:black">module-project</span>
+<div><span class="badge badge-pill badge-primary" style="font-size:1.2em; background-color:#fbb03b; color:black">logistics</span></div><div><span class="badge badge-pill badge-primary" style="font-size:1.2em; background-color:#fbb03b; color:black">design-thinking</span></div><div><span class="badge badge-pill badge-primary" style="font-size:1.2em; background-color:#fbb03b; color:black">module-project</span></div>
 To get the JavaScript juices flowing,
 this module project is to make a simple landing page for whatever you want.
 It could be a portfolio page or a presentation page for an artist.
