@@ -1,14 +1,13 @@
-from md2moodle.constructs.construct_builder import Construct_builder
-from md2moodle.constructs.elements import Prefix_inline_element
-from md2moodle.parsing.scanner import Scanner
-from md2moodle.parsing.parser import Parser
-from md2moodle.compiling.processor import process_tree
-from md2moodle.compiling.compiler import compile
-from md2moodle.conversion.convert import Converter
-
+# Standard library imports
 from pathlib import Path
 
+# md2moodle imports
+from md2moodle.compiling.compiler import compile
+from md2moodle.compiling.processor import process_tree
+from md2moodle.constructs.construct_builder import build_elements_from_rules
+from md2moodle.conversion.convert import Converter
 from md2moodle.debug import p
+from md2moodle.parsing import Scanner, parse
 
 SAMPLE_INPUT_A = """
 @#module-project
@@ -25,8 +24,7 @@ WATCH OUT!
 [/ALERT]
 """
 
-SAMPLE_INPUT_A_CONVERTED = """<span class="badge badge-pill badge-primary" style="font-size:1.2em; background-color:#fbb03b; color:black"><p>module-project</p>
-</span>hello these are words
+SAMPLE_INPUT_A_CONVERTED = """<div><span class="badge badge-pill badge-primary" style="font-size:1.2em; background-color:#fbb03b; color:black">module-project</span></div>hello these are words
 and does the newline<details>
 <summary>Spoiler</summary><h3>Try this header</h3>
 
@@ -37,8 +35,7 @@ sdjklsd</p>
 
 
 def test_simple():
-    construct_builder = Construct_builder("rules.json")
-    constructs = construct_builder.build()
+    constructs = build_elements_from_rules("rules.json")
     p(constructs)
     print("CONSTRUCTS BUILT\n\n")
     scanner = Scanner(constructs)
@@ -51,10 +48,7 @@ def test_simple():
     p(output)
     print("TEXT SCANNED\n\n")
 
-    parser = Parser()
-    print("PARSER BUILT\n\n")
-
-    tree = parser.parse(output)
+    tree = parse(output)
     p(tree)
     print("TREE BUILT\n\n")
 
@@ -73,8 +67,7 @@ def test_simple():
 def test_nested():
     text = Path("tests/nested.md").read_text()
 
-    construct_builder = Construct_builder("rules.json")
-    constructs = construct_builder.build()
+    constructs = build_elements_from_rules("rules.json")
     p(constructs)
     print("CONSTRUCTS BUILT\n\n")
     scanner = Scanner(constructs)
@@ -87,10 +80,7 @@ def test_nested():
     p(output)
     print("TEXT SCANNED\n\n")
 
-    parser = Parser()
-    print("PARSER BUILT\n\n")
-
-    tree = parser.parse(output)
+    tree = parse(output)
     p(tree)
     print("TREE BUILT\n\n")
 
@@ -137,6 +127,7 @@ def test_files():
 
 
 def test_course_exporter():
+    # md2moodle imports
     from md2moodle.conversion.course_export import export_course
 
     export_course(

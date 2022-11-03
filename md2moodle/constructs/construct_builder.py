@@ -1,73 +1,68 @@
-"""Construct Builder - where the information that comes in via JSON gets
+"""Element Builder - where the information that comes in via JSON gets
 translated into classes that will parse and act on the text.
 
-If there is a new construct type, or new rule, this is where it should go.
+If there is a new element type, or new rule, it needs to be handled here.
 """
 
+# Standard library imports
+import json
+from pathlib import Path
+
+# md2moodle imports
+from md2moodle.constructs.elements import (Default_element, Element,
+                                           Prefix_inline_element)
 from md2moodle.parsing.tokens import Token, Token_type_enum
-from md2moodle.constructs.elements import Default_element, Prefix_inline_element
-from md2moodle.constructs.action import Action, Action_type
-
-from md2moodle.rule_reader.file_reader import File_reader
 
 
-class Construct_builder:
-    def __init__(self, path: str):
-        self.constructs: list = []
-        rule_reader = File_reader(path)
-        self.rules = rule_reader.get_rules()
-        self.built = False
+def read_rule_file(path_to_rules_file):
+    return json.loads(Path(path_to_rules_file).read_text())
 
-    def _build_token(self, token_dict):
-        return Token(token_dict["type"], token_dict["pattern"])
 
-    def _build_action(self, action_dict):
-        return Action(Action_type[action_dict["type"]], **action_dict)
+def build_elements_from_rules(path_to_rules_file) -> list[Element]:
 
-    def build(self):
-        if self.built == False:
-            for rule in self.rules:
+    elements: list = []
+    rules = read_rule_file(Path(path_to_rules_file))["rules"]
 
-                # DEFAULT
-                if rule["element_type"] == "default":
-                    start_tag = Token(
-                        token_type=Token_type_enum.START_TAG,
-                        pattern=rule["tokens"]["start_tag"],
-                    )
+    for rule in rules:
 
-                    end_tag = Token(
-                        token_type=Token_type_enum.END_TAG,
-                        pattern=rule["tokens"]["end_tag"],
-                    )
+        # DEFAULT
+        if rule["element_type"] == "default":
+            start_tag = Token(
+                token_type=Token_type_enum.START_TAG,
+                pattern=rule["tokens"]["start_tag"],
+            )
 
-                    element = Default_element(
-                        name=rule["name"],
-                        start_tag=start_tag,
-                        end_tag=end_tag,
-                        actions=rule["actions"],
-                    )
+            end_tag = Token(
+                token_type=Token_type_enum.END_TAG,
+                pattern=rule["tokens"]["end_tag"],
+            )
 
-                    element.start_tag.add_parent(element)
-                    element.end_tag.add_parent(element)
+            element = Default_element(
+                name=rule["name"],
+                start_tag=start_tag,
+                end_tag=end_tag,
+                actions=rule["actions"],
+            )
 
-                # PREFIX INLINE
-                elif rule["element_type"] == "standalone_prefix":
-                    if len(rule["tokens"]) > 1:
-                        raise Exception(
-                            "standalone elements should have only one token"
-                        )
+            element.start_tag.add_parent(element)
+            element.end_tag.add_parent(element)
 
-                    prefix = Token(
-                        token_type=Token_type_enum.PREFIX,
-                        pattern=rule["tokens"]["prefix"],
-                    )
+        # PREFIX INLINE
+        elif rule["element_type"] == "standalone_prefix":
+            if len(rule["tokens"]) > 1:
+                raise Exception("standalone elements should have only one token")
 
-                    element = Prefix_inline_element(
-                        name=rule["name"], prefix=prefix, actions=rule["actions"]
-                    )
+            prefix = Token(
+                token_type=Token_type_enum.PREFIX,
+                pattern=rule["tokens"]["prefix"],
+            )
 
-                    element.prefix.add_parent(element)
+            element = Prefix_inline_element(
+                name=rule["name"], prefix=prefix, actions=rule["actions"]
+            )
 
-                self.constructs.append(element)
-            self.built = True
-        return self.constructs
+            element.prefix.add_parent(element)
+
+        elements.append(element)
+
+    return elements

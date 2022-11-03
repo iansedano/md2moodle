@@ -1,10 +1,6 @@
 """Will compile the processed tree into final output
 """
 
-import re
-import md2moodle.constructs.elements
-import md2moodle.constructs.action
-
 
 def compile(tree):
     output = []

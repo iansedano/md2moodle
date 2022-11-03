@@ -7,11 +7,14 @@ This is a spoiler
 [/SPOILER]  - TOKEN
 """
 
-from md2moodle.constructs.elements import Element
-from md2moodle.parsing.tokens import Token, Token_type_enum
+# md2moodle imports
+from md2moodle.constructs import Element
+from md2moodle.parsing.tokens import Token_type_enum
 
 
 class Scanner:
+    """Scans text and produces list of tokens based on a list of constructs available"""
+
     def __init__(self, constructs: list[Element]):
         self.constructs = constructs
         self.patterns = []

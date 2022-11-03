@@ -21,5 +21,4 @@ sunt in culpa qui officia deserunt mollit anim id est laborum.
 </details><p></p>
 </details><div class="alert alert-info" role="alert"><p>By the way</p>
 </div><div class="alert alert-warning" role="alert"><p>Watch out!</p>
-</div><span class="badge badge-pill badge-primary" style="font-size:1.2em; background-color:#fbb03b; color:black"><p>Test</p>
-</span>
+</div><div><span class="badge badge-pill badge-primary" style="font-size:1.2em; background-color:#fbb03b; color:black">Test</span></div>
