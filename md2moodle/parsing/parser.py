@@ -2,6 +2,9 @@
 from md2moodle.parsing.tokens import Token, Token_type_enum
 
 
+class ParsingError(Exception):
+    pass
+
 class Node:
     """Generic class to build abstract syntax tree"""
 
@@ -15,7 +18,7 @@ class Node:
 
 def parse(tokens: list):
     """Parses a list of tokens and builds an abstract syntax tree"""
-    token_generator = (token for token in tokens)
+    token_generator = iter(tokens)
     tree = {"root": Node(Token_type_enum.ROOT)}
     parent_stack = [tree["root"]]
 
@@ -42,7 +45,7 @@ def parse(tokens: list):
 
         token = next(token_generator, None)
     if len(parent_stack) != 1:
-        raise Exception("Parsing error, open nodes or closing unopened node")
+        raise ParsingError("Open nodes or closing unopened node")
 
     parent_stack[-1].children.append("\n".join(adjacent_strings))
 

@@ -18,14 +18,16 @@ class Element:
         self.actions = self.build_actions(actions)
 
     def build_actions(self, actions: dict):
-        output = []
-        for type, payload in actions.items():
-            output.append(Action(Action_type[type], payload))
-        return output
+        return [
+            Action(Action_type[type], payload)
+            for type, payload in actions.items()
+        ]
 
 
 class Default_element(Meta_element, Element):
-    def __init__(self, *, name: str, start_tag: Token, end_tag: Token, actions: dict):
+    def __init__(
+        self, *, name: str, start_tag: Token, end_tag: Token, actions: dict
+    ):
         super().__init__(name, actions)
         self.start_tag = start_tag
         self.end_tag = end_tag

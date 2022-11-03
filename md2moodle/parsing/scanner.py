@@ -19,22 +19,25 @@ class Scanner:
         self.constructs = constructs
         self.patterns = []
         for construct in constructs:
-            for token in construct.get_tokens():
-                self.patterns.append(token.pattern)
+            self.patterns.extend(
+                token.pattern for token in construct.get_tokens()
+            )
         self.errors: list = []
 
     def check(self, line):
         for pattern in self.patterns:
             matches = pattern.findall(line)
             if len(matches) > 1:
-                self.errors.append("ERROR '" + line + "'. Only one tag per line")
+                self.errors.append(
+                    "ERROR '" + line + "'. Only one tag per line"
+                )
             elif len(matches) == 1:
                 if not pattern.match(line):
                     self.errors.append(
                         "ERROR '" + line + "'. Tag must be only thing on line"
                     )
 
-    def match(self, line):
+    def match(self, line):  # sourcery skip: use-named-expression
         for construct in self.constructs:
             for token in construct.get_tokens():
                 match = token.pattern.match(line)
@@ -55,12 +58,10 @@ class Scanner:
         for line in lines:
             match, token = self.match(line)
             if token:
+                output.append(token)
                 # This is opt out of inline elements because they are matched and replaced during processing
                 if token.token_type == Token_type_enum.PREFIX:
-                    output.append(token)
                     output.append(match[2])
-                else:
-                    output.append(token)
             else:
                 output.append(line)
         return output

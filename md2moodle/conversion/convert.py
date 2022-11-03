@@ -1,8 +1,10 @@
 # md2moodle imports
 from md2moodle.compiling.compiler import compile
 from md2moodle.compiling.processor import process_tree
-from md2moodle.constructs import (Prefix_inline_element,
-                                  build_elements_from_rules)
+from md2moodle.constructs import (
+    Prefix_inline_element,
+    build_elements_from_rules,
+)
 from md2moodle.parsing import Scanner, parse
 
 
@@ -21,5 +23,4 @@ class Converter:
         output = self.scanner.scan(text)
         tree = parse(output)
         processed_tree = process_tree(tree)
-        compiled_output = compile(processed_tree)
-        return compiled_output
+        return compile(processed_tree)

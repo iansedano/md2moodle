@@ -9,9 +9,16 @@ import json
 from pathlib import Path
 
 # md2moodle imports
-from md2moodle.constructs.elements import (Default_element, Element,
-                                           Prefix_inline_element)
+from md2moodle.constructs.elements import (
+    Default_element,
+    Element,
+    Prefix_inline_element,
+)
 from md2moodle.parsing.tokens import Token, Token_type_enum
+
+
+class RuleError(Exception):
+    pass
 
 
 def read_rule_file(path_to_rules_file):
@@ -50,7 +57,9 @@ def build_elements_from_rules(path_to_rules_file) -> list[Element]:
         # PREFIX INLINE
         elif rule["element_type"] == "standalone_prefix":
             if len(rule["tokens"]) > 1:
-                raise Exception("standalone elements should have only one token")
+                raise RuleError(
+                    "standalone elements should have only one token"
+                )
 
             prefix = Token(
                 token_type=Token_type_enum.PREFIX,

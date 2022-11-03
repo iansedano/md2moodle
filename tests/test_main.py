@@ -6,7 +6,6 @@ from md2moodle.compiling.compiler import compile
 from md2moodle.compiling.processor import process_tree
 from md2moodle.constructs.construct_builder import build_elements_from_rules
 from md2moodle.conversion.convert import Converter
-from md2moodle.debug import p
 from md2moodle.parsing import Scanner, parse
 
 SAMPLE_INPUT_A = """
@@ -36,24 +35,24 @@ sdjklsd</p>
 
 def test_simple():
     constructs = build_elements_from_rules("rules.json")
-    p(constructs)
+    print(constructs)
     print("CONSTRUCTS BUILT\n\n")
     scanner = Scanner(constructs)
-    p(scanner)
+    print(scanner)
     print("SCANNER BUILT\n\n")
 
     scanner.pre_scan(SAMPLE_INPUT_A)
     print("TEXT PRE SCANNED\n\n")
     output = scanner.scan(SAMPLE_INPUT_A)
-    p(output)
+    print(output)
     print("TEXT SCANNED\n\n")
 
     tree = parse(output)
-    p(tree)
+    print(tree)
     print("TREE BUILT\n\n")
 
     processed_tree = process_tree(tree)
-    p(processed_tree)
+    print(processed_tree)
     print("TREE PROCESSED\n\n")
 
     compiled_output = compile(processed_tree)
@@ -68,24 +67,24 @@ def test_nested():
     text = Path("tests/nested.md").read_text()
 
     constructs = build_elements_from_rules("rules.json")
-    p(constructs)
+    print(constructs)
     print("CONSTRUCTS BUILT\n\n")
     scanner = Scanner(constructs)
-    p(scanner)
+    print(scanner)
     print("SCANNER BUILT\n\n")
 
     scanner.pre_scan(text)
     print("TEXT PRE SCANNED\n\n")
     output = scanner.scan(text)
-    p(output)
+    print(output)
     print("TEXT SCANNED\n\n")
 
     tree = parse(output)
-    p(tree)
+    print(tree)
     print("TREE BUILT\n\n")
 
     processed_tree = process_tree(tree)
-    p(processed_tree)
+    print(processed_tree)
     print("TREE PROCESSED\n\n")
 
     compiled_output = compile(processed_tree)
@@ -114,8 +113,8 @@ def test_files():
 
     for path in test_files:
         print("\n\nNEW FILE\n\n")
-        full_path = "tests/" + path
-        result_path = full_path[:-3] + "_result.md"
+        full_path = f"tests/{path}"
+        result_path = f"{full_path[:-3]}_result.md"
         print(result_path)
         text = Path(full_path).read_text()
         converted_text = converter.convert_text(text)

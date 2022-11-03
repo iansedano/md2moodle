@@ -8,7 +8,6 @@ from md2moodle.compiling.compiler import compile
 from md2moodle.compiling.processor import process_tree
 from md2moodle.constructs.construct_builder import build_elements_from_rules
 from md2moodle.conversion.convert import Converter
-from md2moodle.debug import p
 from md2moodle.parsing import Scanner, parse
 
 
@@ -191,13 +190,17 @@ def standalone_prefix_text():
 #     return build_elements_from_rules(prefix_delete_rule)
 
 
-def test_constructs_built(default_rule, standalone_prefix_rule, prefix_delete_rule):
+def test_constructs_built(
+    default_rule, standalone_prefix_rule, prefix_delete_rule
+):
     build_elements_from_rules(default_rule)
     build_elements_from_rules(standalone_prefix_rule)
     build_elements_from_rules(prefix_delete_rule)
 
 
-def test_scanner_built(default_rule, standalone_prefix_rule, prefix_delete_rule):
+def test_scanner_built(
+    default_rule, standalone_prefix_rule, prefix_delete_rule
+):
     Scanner(build_elements_from_rules(default_rule))
     Scanner(build_elements_from_rules(standalone_prefix_rule))
     Scanner(build_elements_from_rules(prefix_delete_rule))
@@ -205,8 +208,12 @@ def test_scanner_built(default_rule, standalone_prefix_rule, prefix_delete_rule)
 
 def test_pre_scan(default_rule, standalone_prefix_rule, prefix_delete_rule):
     Scanner(build_elements_from_rules(default_rule)).pre_scan("Hello, World")
-    Scanner(build_elements_from_rules(standalone_prefix_rule)).pre_scan("Hello, World")
-    Scanner(build_elements_from_rules(prefix_delete_rule)).pre_scan("Hello, World")
+    Scanner(build_elements_from_rules(standalone_prefix_rule)).pre_scan(
+        "Hello, World"
+    )
+    Scanner(build_elements_from_rules(prefix_delete_rule)).pre_scan(
+        "Hello, World"
+    )
 
 
 def test_simple_spoiler(default_rule, simple_spoiler_text):
@@ -225,13 +232,17 @@ def test_nested_spoiler(default_rule, nested_spoiler_text):
 
 def test_triple_nested_spoiler(default_rule, triple_nested_spoiler_text):
     assert (
-        Converter(default_rule).convert_text(triple_nested_spoiler_text.markdown)
+        Converter(default_rule).convert_text(
+            triple_nested_spoiler_text.markdown
+        )
         == triple_nested_spoiler_text.html
     )
 
 
 def test_standalone_prefix(standalone_prefix_rule, standalone_prefix_text):
     assert (
-        Converter(standalone_prefix_rule).convert_text(standalone_prefix_text.markdown)
+        Converter(standalone_prefix_rule).convert_text(
+            standalone_prefix_text.markdown
+        )
         == standalone_prefix_text.html
     )

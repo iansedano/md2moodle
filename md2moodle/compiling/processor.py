@@ -10,12 +10,14 @@ def process_tree(tree):
 
     def process_branch(branch):
         children: list = branch.children
-        children_generator = (child for child in children)
+        children_generator = iter(children)
         current_child: Node = next(children_generator, None)
 
         while current_child is not None:
             if isinstance(current_child, Node):
-                actions = sorted(current_child.construct.actions, key=lambda a: a.type)
+                actions = sorted(
+                    current_child.construct.actions, key=lambda a: a.type
+                )
 
                 for action in actions:
                     action.execute(current_child)
