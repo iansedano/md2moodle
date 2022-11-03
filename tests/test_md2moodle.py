@@ -1,8 +1,7 @@
+import json
 from collections import namedtuple
 
 import pytest
-
-import json
 
 # md2moodle imports
 from md2moodle.compiling.compiler import compile
@@ -10,7 +9,7 @@ from md2moodle.compiling.processor import process_tree
 from md2moodle.constructs.construct_builder import build_elements_from_rules
 from md2moodle.conversion.convert import Converter
 from md2moodle.debug import p
-from md2moodle.parsing import parse, Scanner
+from md2moodle.parsing import Scanner, parse
 
 
 @pytest.fixture

@@ -1,9 +1,9 @@
 # Standard library imports
+import re
 from enum import IntEnum
 
 # Third party imports
 import markdown2
-import re
 
 # md2moodle imports
 from md2moodle.parsing import Node

@@ -7,7 +7,7 @@ from md2moodle.compiling.processor import process_tree
 from md2moodle.constructs.construct_builder import build_elements_from_rules
 from md2moodle.conversion.convert import Converter
 from md2moodle.debug import p
-from md2moodle.parsing import parse, Scanner
+from md2moodle.parsing import Scanner, parse
 
 SAMPLE_INPUT_A = """
 @#module-project

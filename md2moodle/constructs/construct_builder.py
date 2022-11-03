@@ -9,11 +9,8 @@ import json
 from pathlib import Path
 
 # md2moodle imports
-from md2moodle.constructs.elements import (
-    Default_element,
-    Element,
-    Prefix_inline_element,
-)
+from md2moodle.constructs.elements import (Default_element, Element,
+                                           Prefix_inline_element)
 from md2moodle.parsing.tokens import Token, Token_type_enum
 
 
