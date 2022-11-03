@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "md2moodle"
+version = "0.1.0"
+description = "Use an extended markdown for moodle"
+readme = "README.md"
+keywords = ["markdown", "moodle"]
+
+[project.scripts]
+md2moodle = "md2moodle:main"
+
+[tool.black]
+line_length = 80
+
+[tool.isort]
+multi_line_output = 3
+profile = "black"
+import_heading_stdlib = "Standard library imports"
+import_heading_thirdparty = "Third party imports"
+import_heading_firstparty = "md2moodle imports"
+
+[tool.mypy]
+ignore_missing_imports = true
