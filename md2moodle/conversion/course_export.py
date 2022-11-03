@@ -11,7 +11,7 @@ def export_course(rules: Path, course_root: Path, glob: str, output: Path):
 
     converter = Converter(rules)
 
-    output = Path(output.absolute())
+    output = Path(output.absolute() / course_root.name)
 
     if output.exists():
         rmtree(output)
