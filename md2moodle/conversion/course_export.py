@@ -4,12 +4,15 @@ from shutil import rmtree
 
 # md2moodle imports
 from md2moodle.conversion.convert import Converter
+from md2moodle.replace_md_links import replace_content
 
 
 def export_course(rules: Path, course_root: Path, glob: str, output: Path):
 
     converter = Converter(rules)
+
     output = Path(output.absolute())
+
     if output.exists():
         rmtree(output)
 
@@ -21,7 +24,7 @@ def export_course(rules: Path, course_root: Path, glob: str, output: Path):
 
     for file in files:
         try:
-            text = converter.convert_text(file.read_text())
+            text = converter.convert_text(replace_content(file.read_text()))
             parts = file.parts[root_len:]
             new_path = Path(output, *parts)
             folder_of_new_path = Path(*new_path.parts[:-1])

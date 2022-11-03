@@ -1,6 +1,8 @@
+# Standard library imports
 import json
 from collections import namedtuple
 
+# Third party imports
 import pytest
 
 # md2moodle imports
